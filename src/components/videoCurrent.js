@@ -12,4 +12,4 @@ const VideoCurrent = (props) =>{
     )
 }
 
-export default VideoCurrent
+export default VideoCurrent;

@@ -5,10 +5,11 @@ import VideoItem from '../components/videoItem';
 const VideoList = (props) => {
     const movieList = props.movieList;
     // console.log('---je suis la liste----', movieList);
+    const title = props.title
 
     return(
         <div className="rightside">
-            <h1>POPULAIRES</h1>
+            <h1>{title}</h1>
             <ul className="videolist">
                 {movieList.map(movie => {       
                     return <VideoItem key={movie.id} movie={movie} title={movie.title} image={movie.poster_path} callBack={receiveMovie} />

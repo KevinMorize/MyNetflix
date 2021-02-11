@@ -16,7 +16,8 @@ class App extends React.Component {
       super(props);
       this.state= {
         movieList: {}, 
-        currentMovie: {}
+        currentMovie: {},
+        titleList: "Populaires"
       };
     }
 
@@ -57,6 +58,7 @@ class App extends React.Component {
     onClickListItem(movie) {
       // console.log('---click app---', movie);
       this.setState({currentMovie: movie}, () => {this.getAxiosVideo();})
+      this.setState({titleList: "Recommandés"})
     }
 
     getTextSearch(textSearch) {
@@ -82,7 +84,7 @@ class App extends React.Component {
 
       const renderMovieList = () => {
         if (this.state.movieList.length >= 6) {
-          return  <VideoList movieList={this.state.movieList} callBack={this.onClickListItem.bind(this)} />
+          return  <VideoList movieList={this.state.movieList} callBack={this.onClickListItem.bind(this)} title={this.state.titleList} />
         }
       }
 
@@ -94,6 +96,7 @@ class App extends React.Component {
 
       return (
         <div className="main">
+          <img src="https://www.serieously.com/wp-content/uploads/2019/04/netflixlogo.png" className="justify-center logo" />
           <SearchBar callBack={this.getTextSearch.bind(this)} />
           <VideoCurrent videoId={this.state.currentMovie.videoId} />
           {renderNoVideo()}
