@@ -4,6 +4,8 @@ import VideoItem from '../components/videoItem';
 
 const VideoList = (props) => {
     const movieList = props.movieList;
+    const previewVideo = props.previewVideo;
+        // console.log('---je suis la liste----', previewVideo);
     // console.log('---je suis la liste----', movieList);
     const title = props.title
 
@@ -12,14 +14,26 @@ const VideoList = (props) => {
             <h1>{title}</h1>
             <ul className="videolist">
                 {movieList.map(movie => {       
-                    return <VideoItem key={movie.id} movie={movie} title={movie.title} image={movie.poster_path} callBack={receiveMovie} />
+                    return <VideoItem 
+                                key={movie.id} 
+                                movie={movie} 
+                                title={movie.title} 
+                                image={movie.poster_path} 
+                                callBack={receiveMovie}
+                                previewVideo={previewVideo}
+                                preview={receivePreview}
+                            />
                 })}
             </ul>
         </div>
     )
     function receiveMovie(movie){
         // console.log('--click parent--', movie);
-        props.callBack(movie)
+        props.callBack(movie);
+    }
+
+    function receivePreview(movie) {
+        props.preview(movie);
     }
 }
 

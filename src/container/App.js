@@ -17,7 +17,8 @@ class App extends React.Component {
       this.state= {
         movieList: {}, 
         currentMovie: {},
-        titleList: "Populaires"
+        titleList: "Populaires",
+        previewMovieList: {},
       };
     }
 
@@ -41,14 +42,29 @@ class App extends React.Component {
 
     getAxiosVideo() {
       axios.get(`${API_END_POINT}movie/${this.state.currentMovie.id}?${API_KEY}&append_to_response=videos&include_adult=false`).then(function(response) {
-        // console.log('---response---', response)
+
 
         if (response.data.videos && response.data.videos.results[0]){
           const youtubeId = response.data.videos.results[0].key;
           let newCurrentMovie = this.state.currentMovie
           newCurrentMovie.videoId = youtubeId;
+          console.log('putin--------');
           this.setState({currentMovie: newCurrentMovie, noVideo:''});
           this.setRecommend();
+        }else {
+          this.setState({ noVideo: 'Video indisponible !!!'});
+        }  
+      }.bind(this));   
+    }
+
+    getAxiosPreview() {
+      axios.get(`${API_END_POINT}movie/${this.state.previewMovieList.id}?${API_KEY}&append_to_response=videos&include_adult=false`).then(function(response) {
+
+        if (response.data.videos && response.data.videos.results[0]){
+          const youtubeId = response.data.videos.results[0].key;
+          let newCurrentMovie = this.state.previewMovieList;
+          newCurrentMovie.videoId = youtubeId;
+          this.setState({previewMovieList: newCurrentMovie, noVideo:''});
         }else {
           this.setState({ noVideo: 'Video indisponible !!!'});
         }  
@@ -59,6 +75,13 @@ class App extends React.Component {
       // console.log('---click app---', movie);
       this.setState({currentMovie: movie}, () => {this.getAxiosVideo();})
       this.setState({titleList: "Recommandés"})
+    }
+
+    onMouseHoverListItem(preview){
+      this.setState({previewMovieList: preview}, () => {
+        this.getAxiosPreview();
+        console.log('toto--------', this.state.previewMovieList);
+      })
     }
 
     getTextSearch(textSearch) {
@@ -84,7 +107,7 @@ class App extends React.Component {
 
       const renderMovieList = () => {
         if (this.state.movieList.length >= 6) {
-          return  <VideoList movieList={this.state.movieList} callBack={this.onClickListItem.bind(this)} title={this.state.titleList} />
+          return  <VideoList previewVideo={this.state.previewMovieList} preview={this.onMouseHoverListItem.bind(this)} movieList={this.state.movieList} callBack={this.onClickListItem.bind(this)} title={this.state.titleList} />
         }
       }
 
