@@ -5,8 +5,6 @@ import VideoItem from '../components/videoItem';
 const VideoList = (props) => {
     const movieList = props.movieList;
     const previewVideo = props.previewVideo;
-        // console.log('---je suis la liste----', previewVideo);
-    // console.log('---je suis la liste----', movieList);
     const title = props.title
 
     return(
@@ -28,7 +26,6 @@ const VideoList = (props) => {
         </div>
     )
     function receiveMovie(movie){
-        // console.log('--click parent--', movie);
         props.callBack(movie);
     }
 

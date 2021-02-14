@@ -9,7 +9,8 @@ const VideoItem = (props) => {
     const [hover, setHover] = useState(false);
 
     return (
-        <>
+        
+        <div className="videolistitem">
         {!hover 
             ?<div 
                 className="videoitem" 
@@ -25,26 +26,25 @@ const VideoItem = (props) => {
             :
             <div className="videoiframe" onMouseLeave={handleLeaveMouse}>
                 <p onClick={handleClick}>Voir dans le lecteur</p>
-                <iframe src={`${YOUTUBE_URL}${previewVideo.videoId}`} />
+                <iframe src={`${YOUTUBE_URL}${previewVideo.videoId}`} id="preview" />
             </div>  
         }
-        </>
+        </div>
     )
 
-    function handleClick() {
+    
 
+    function handleClick() {
         props.callBack(movie)
     }
  
     function handleMouseEnter(){
-        setTimeout(() =>
-        setHover(true), 500);
+        setHover(true);
         props.preview(movie)
     }
 
     function handleLeaveMouse() {
-        setTimeout(() =>
-        setHover(false), 400);
+        setHover(false); 
     }
 }
 

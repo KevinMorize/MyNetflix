@@ -32,9 +32,7 @@ class App extends React.Component {
           movieList: res.data.results.slice(1, 7), 
           currentMovie: res.data.results[0] }, 
           function () {
-            // console.log('currentmovie', this.state.currentMovie)
             this.getAxiosVideo();
-
           }
         );
       }.bind(this));
@@ -72,7 +70,6 @@ class App extends React.Component {
     }
     
     onClickListItem(movie) {
-      // console.log('---click app---', movie);
       this.setState({currentMovie: movie}, () => {this.getAxiosVideo();})
       this.setState({titleList: "Recommandés"})
     }
@@ -80,7 +77,6 @@ class App extends React.Component {
     onMouseHoverListItem(preview){
       this.setState({previewMovieList: preview}, () => {
         this.getAxiosPreview();
-        console.log('toto--------', this.state.previewMovieList);
       })
     }
 
@@ -128,8 +124,6 @@ class App extends React.Component {
         </div>
       )
     }
-
-
 }
 
 export default App; 
