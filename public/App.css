@@ -180,7 +180,7 @@ body{
 }
 
 @media all and (max-width: 960px){
-    .body{
+    body{
         margin: 0;
     }
 
@@ -235,5 +235,9 @@ body{
     .synopsis{
         text-align: center;
         font-size: 1em;
+    }
+
+    .videolistitem:hover{
+        transform: translate(0);
     }
 }
