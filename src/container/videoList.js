@@ -29,7 +29,7 @@ const VideoList = (props) => {
         props.callBack(movie);
     }
 
-    function receivePreview(movie) {
+    function receivePreview(movie){
         props.preview(movie);
     }
 }

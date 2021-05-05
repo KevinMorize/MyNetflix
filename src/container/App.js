@@ -46,7 +46,6 @@ class App extends React.Component {
           const youtubeId = response.data.videos.results[0].key;
           let newCurrentMovie = this.state.currentMovie
           newCurrentMovie.videoId = youtubeId;
-          console.log('putin--------');
           this.setState({currentMovie: newCurrentMovie, noVideo:''});
           this.setRecommend();
         }else {
@@ -83,7 +82,7 @@ class App extends React.Component {
     getTextSearch(textSearch) {
       axios.get(`${API_END_POINT}${SEARCH_URL}&${API_KEY}&query=${textSearch}`).then(function(reponse){
         if (reponse.data && reponse.data.results[0]) {
-          if (reponse.data.results[0].id != this.state.currentMovie.id){
+          if (reponse.data.results[0].id !== this.state.currentMovie.id){
             this.setState({ currentMovie: reponse.data.results[0] }, () => {
               this.getAxiosVideo();
               this.setRecommend();
@@ -108,14 +107,14 @@ class App extends React.Component {
       }
 
       const renderNoVideo = () => {
-        if (this.state.noVideo != ''){
+        if (this.state.noVideo !== ''){
           return <h1 className="novideo">{this.state.noVideo}</h1>
         }
       }
 
       return (
         <div className="main">
-          <img src="https://www.serieously.com/wp-content/uploads/2019/04/netflixlogo.png" className="justify-center logo" />
+          <div id="logo"><h1>my</h1><img src="logo.png" className="justify-center logo" alt="logo-netflix" /></div>
           <SearchBar callBack={this.getTextSearch.bind(this)} />
           <VideoCurrent videoId={this.state.currentMovie.videoId} />
           {renderNoVideo()}
